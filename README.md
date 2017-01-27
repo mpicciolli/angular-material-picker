@@ -13,10 +13,10 @@ I added 24H format and the possibility to set dialog buttons.
 
 ## Using Angular-material-picker
 
-Install via Bower:
+Install via npm:
 
 ```bash
-bower install mdPickers
+npm install angular-material-picker
 ```
 
 Use in Angular:
