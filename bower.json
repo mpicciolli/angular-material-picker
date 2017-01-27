@@ -1,0 +1,33 @@
+{
+  "name": "angular-material-picker",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mpicciolli/angular-material-picker",
+  "authors": [
+    "mpicciolli"
+  ],
+  "description": "Material Design date/time pickers built with Angular Material and Moment.js",
+  "main": [
+    "dist/mdPickers.min.js",
+    "dist/mdPickers.min.css"
+  ],
+  "keywords": [
+    "angular",
+    "material",
+    "pickers",
+    "date",
+    "time"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "angular-material": "~1.0.4",
+    "moment": "~2.11.1"
+  }
+}
