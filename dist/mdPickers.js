@@ -499,7 +499,9 @@ module.directive("mdpDatePicker", ["$mdpDatePicker", "$timeout", function($mdpDa
                 	    minDate: scope.minDate,
                 	    maxDate: scope.maxDate,
                 	    dateFilter: scope.dateFilter,
-                	    targetEvent: ev
+                	    targetEvent: ev,
+						confirmText: scope.confirmText,
+	                    cancelText: scope.cancelText
             	    }).then(updateDate);
                 };
 
