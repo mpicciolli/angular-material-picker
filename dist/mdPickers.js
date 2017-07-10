@@ -500,7 +500,7 @@ module.directive("mdpDatePicker", ["$mdpDatePicker", "$timeout", function($mdpDa
                 	    maxDate: scope.maxDate,
                 	    dateFilter: scope.dateFilter,
                 	    targetEvent: ev
-            	    }).then(updateDate);
+            	    }).then(updateDate).catch(function(error) {return error});
                 };
 
                 function onInputElementEvents(event) {
@@ -561,7 +561,7 @@ module.directive("mdpDatePicker", ["$mdpDatePicker", "$timeout", function($mdpDa
         	    }).then(function(time) {
                     ngModel.$setViewValue(moment(time).format(scope.format));
                     ngModel.$render();
-                });
+                }).catch(function(error) {return error});
             };
 
             element.on("click", showPicker);
@@ -933,7 +933,7 @@ module.directive("mdpTimePicker", ["$mdpTimePicker", "$timeout", function($mdpTi
                     cancelText: scope.cancelText
                 }).then(function(time) {
                     updateTime(time, true);
-                });
+                }).catch(function(error) {return error});
             };
 
             function onInputElementEvents(event) {
@@ -975,7 +975,7 @@ module.directive("mdpTimePicker", ["$mdpTimePicker", "$timeout", function($mdpTi
                 }).then(function(time) {
                     ngModel.$setViewValue(moment(time).format(scope.format));
                     ngModel.$render();
-                });
+                }).catch(function(error) {return error});
             };
             
             element.on("click", showPicker);
