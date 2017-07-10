@@ -3,7 +3,11 @@ Material Design date/time pickers built with Angular Material and Moment.js
 
 It's a fork of @alenaksu/mdPickers repository (Latest commit on 13 May 2016).
 
-I added 24H format and the possibility to set dialog buttons.
+I added 24H format and the possibility to set the label buttons of the dialog.
+
+## Online demos
+
+* [CodePen](https://codepen.io/mpicciolli/full/OgaVGL/)
 
 ## Requirements
 
