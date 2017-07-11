@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     wrap = require('gulp-wrap'),
     concat = require('gulp-concat'),
     autoprefixer = require('gulp-autoprefixer'),
-    path = require('path');
+    path = require('path'),
+    server = require('gulp-server-livereload');
 
 var outputFolder = 'dist/';
 var moduleName = 'mdPickers';
@@ -39,6 +40,16 @@ gulp.task('build-app', function() {
 
 gulp.task('watch', function() {
     gulp.watch('src/**/*', ['assets', 'build-app']);
+});
+
+gulp.task('demo', ['assets', 'build-app'], function() {
+  return gulp.src('./')
+    .pipe(server({
+      livereload:       true,
+      open:             true,
+      log:              'debug',
+      clientConsole:    true
+    }));
 });
 
 gulp.task('default', ['assets', 'build-app']);

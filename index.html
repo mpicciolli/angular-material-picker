@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>angular-material-picker - date/time pickers for Angular Material </title>
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="//cdn.rawgit.com/angular/bower-material/v1.0.6/angular-material.min.css" rel="stylesheet">
+  <link href="./dist/mdPickers.min.css" rel="stylesheet">
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="//cdn.rawgit.com/angular/bower-material/v1.0.6/angular-material.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <script src="./dist/mdPickers.min.js"></script> 
+
+  <script>
+    (function() {
+        var module = angular.module("app", [
+        "ngMaterial",
+        "ngAnimate",
+        "ngAria",
+        "ngMessages",
+        "mdPickers"
+    ]); 
+    
+    module.controller("MainCtrl", ['$scope', '$mdpDatePicker', '$mdpTimePicker', function($scope, $mdpDatePicker, $mdpTimePicker){
+        $scope.currentDate = new Date();
+        this.showDatePicker = function(ev) {
+            $mdpDatePicker($scope.currentDate, {
+            targetEvent: ev,
+            confirmText: "Custom text"
+        }).then(function(selectedDate) {
+            $scope.currentDate = selectedDate;
+        });;
+        };
+        
+        this.filterDate = function(date) {
+        return moment(date).date() % 2 == 0;
+        };
+        
+        this.showTimePicker = function(ev) {
+            $mdpTimePicker($scope.currentTime, {
+            targetEvent: ev,
+            confirmText: "Custom text"
+        }).then(function(selectedDate) {
+            $scope.currentTime = selectedDate;
+        });;
+        }  
+    }]);
+    })();
+  </script>
+</head>
+<body>
+<md-content id="content" layout="column" flex ng-app="app" ng-controller="MainCtrl as ctrl">
+  <md-toolbar class="md-whiteframe-z2">
+    <div style="text-align: center;">
+      <h1>angular-material-picker</h1>
+      <h2>Material Design date/time pickers</h2>
+    </div>
+  </md-toolbar>
+  
+  <md-content flex layout="column" layout-align="center center" layout-padding>
+    <h3><a href="https://github.com/mpicciolli/angular-material-picker">https://github.com/mpicciolli/angular-material-picker</a></h3>
+    
+    <div layout="row" ng-form="demoForm">
+          <div layout-padding>
+            <h2>Date picker</h2>
+            <div>
+              <h4 class="md-subhead">Standard date picker</h4>
+              <mdp-date-picker mdp-placeholder="Date" ng-model="currentDate"></mdp-date-picker>
+            </div>
+            <div>
+              <h4 class="md-subhead">Standard date picker with custom button label </h4>
+              <mdp-date-picker mdp-placeholder="Date" ng-model="currentDate" mdp-confirm-text="Ok" mdp-cancel-text="Not ok"></mdp-date-picker>
+            </div>
+            <div>
+              <h4 class="md-subhead">Disabled date picker</h4>
+              <mdp-date-picker mdp-placeholder="Date" mdp-disabled="true" ng-model="currentDate"></mdp-date-picker>
+            </div>
+            <div>
+              <h4 class="md-subhead">Custom format + error messages</h4>
+              <mdp-date-picker mdp-open-on-click required name="dateFormat" mdp-placeholder="My date(dd/mm/yyyy)" mdp-format="DD/MM/YYYY" ng-model="currentDate">
+                <div ng-messages="demoForm.dateFormat.$error">
+                  <div ng-message="required">This is required</div>
+                  <div ng-message="format">Invalid format</div>
+                </div>
+              </mdp-date-picker>
+            </div>
+            <div>
+              <h4 class="md-subhead">Min/max date</h4>
+              <mdp-date-picker name="minMaxDate" mdp-placeholder="Date" mdp-min-date="'2000-01-01'" mdp-max-date="'2005-01-01'" ng-model="currentDate">
+                <div ng-messages="demoForm.minMaxDate.$error">
+                  <div ng-message="required">This is required</div>
+                  <div ng-message="format">Invalid format</div>
+                  <div ng-message="minDate">Min date</div>
+                  <div ng-message="maxDate">Max date</div>
+                </div>
+              </mdp-date-picker>
+            </div>
+            <div>
+              <h4 class="md-subhead">Filtering date</h4>
+              <mdp-date-picker mdp-placeholder="Date" mdp-date-filter="ctrl.filterDate" ng-model="currentDateMinMax"></mdp-date-picker>
+            </div>
+            <div>
+              <h4 class="md-subhead">Using $mdpDatePicker service</h4>
+              <md-button class="md-raised md-warn" ng-click="ctrl.showDatePicker($event)" aria-label="show picker">show picker</md-button>
+              <p>
+                {{ currentDate | date:'shortDate' }}
+              </p>
+            </div>
+          </div>
+          <div layout-padding>
+            <h2>Time picker</h2>
+            <div>
+              <h4 class="md-subhead">Standard time picker</h4>
+              
+              <mdp-time-picker ng-model="currentDate"></mdp-time-picker>
+            </div>
+
+            <div>
+              <h4 class="md-subhead">Standard time picker with custom button label</h4>
+              <mdp-time-picker ng-model="currentDate" mdp-confirm-text="Ok" mdp-cancel-text="Not ok"></mdp-time-picker>
+            </div>
+            
+            <div>
+              <h4 class="md-subhead">Disabled time picker</h4>
+              <mdp-time-picker mdp-disabled="true" ng-model="currentDate"></mdp-time-picker>
+            </div>
+            
+            <div>
+              <h4 class="md-subhead">Auto switch between hours and minutes</h4>
+              
+              <mdp-time-picker mdp-auto-switch="true" ng-model="currentTime"></mdp-time-picker>
+            </div>
+    
+            <div>
+              <h4 class="md-subhead">Custom format + error messages</h4>
+              <mdp-time-picker name="timeFormat" ng-model="currentTimeText" mdp-format="HH:mm A">
+                <div ng-messages="demoForm.timeFormat.$error">
+                  <div ng-message="required">This is required</div>
+                  <div ng-message="format">Invalid format</div>
+                </div>
+              </mdp-time-picker>
+            </div>
+            
+            <input type="time" ng-model="test" mdp-time-picker />
+    
+            <div>
+              <h4 class="md-subhead">Using $mdpTimePicker service</h4>
+              <md-button class="md-raised md-warn" ng-click="ctrl.showTimePicker($event)" aria-label="show picker">show picker</md-button>
+              <p>
+                {{ currentDate | date:'HH:mm' }}
+              </p>
+            </div>
+            <div>
+              <h4 class="md-subhead">Time picker with am/pm format</h4>
+              <mdp-time-picker ng-model="currentDate" mdp-ampm="false"></mdp-time-picker>
+            </div>
+          </div>
+    </div>
+    <div>
+  </md-content>
+</md-content>
+</body>
+</html>
