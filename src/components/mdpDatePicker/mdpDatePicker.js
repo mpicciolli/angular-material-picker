@@ -8,8 +8,9 @@ function DatePickerCtrl($scope, $mdDialog, $mdMedia, $timeout, currentDate, opti
     this.maxDate = options.maxDate && moment(options.maxDate).isValid() ? moment(options.maxDate) : null;
     this.displayFormat = options.displayFormat || "ddd, MMM DD";
     this.dateFilter = angular.isFunction(options.dateFilter) ? options.dateFilter : null;
-    this.confirmText = options.confirmText;
-    this.cancelText = options.cancelText;
+    this.confirmText= options.confirmText ? options.confirmText :"OK";
+    this.cancelText= options.cancelText ? options.cancelText :"Cancel";
+
     this.selectingYear = false;
 
     // validate min and max date
@@ -438,7 +439,9 @@ module.directive("mdpDatePicker", ["$mdpDatePicker", "$timeout", function($mdpDa
                 	    minDate: scope.minDate,
                 	    maxDate: scope.maxDate,
                 	    dateFilter: scope.dateFilter,
-                	    targetEvent: ev
+                	    targetEvent: ev,
+                        confirmText: scope.confirmText,
+                        cancelText: scope.cancelText
             	    }).then(updateDate);
                 };
 
@@ -472,8 +475,8 @@ module.directive("mdpDatePicker", ["$mdpDatePicker", "$timeout", function($mdpDa
         },
         link: function(scope, element, attrs, ngModel, $transclude) {
             scope.dateFormat = scope.dateFormat || "YYYY-MM-DD";
-            scope.confirmText= scope.confirmText ? scope.confirmText :"OK";
-            scope.cancelText= scope.cancelText ? scope.cancelText :"Cancel";
+            scope.confirmText= scope.confirmText;
+            scope.cancelText= scope.cancelText;
 
             ngModel.$validators.format = function(modelValue, viewValue) {
                 return formatValidator(viewValue, scope.format);
@@ -496,7 +499,9 @@ module.directive("mdpDatePicker", ["$mdpDatePicker", "$timeout", function($mdpDa
             	    minDate: scope.minDate,
             	    maxDate: scope.maxDate,
             	    dateFilter: scope.dateFilter,
-            	    targetEvent: ev
+            	    targetEvent: ev,
+                    confirmText: scope.confirmText,
+                    cancelText: scope.cancelText
         	    }).then(function(time) {
                     ngModel.$setViewValue(moment(time).format(scope.format));
                     ngModel.$render();

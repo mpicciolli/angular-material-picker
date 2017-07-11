@@ -1,6 +1,12 @@
+### 0.7.7
+
+Minor bugfixes
+
 ### 0.7.6
 
 * Added attribute `mdp-ampm` to switch between 24/12 (disabled by default)
+* Added attribute `mdp-confirm-text` to set confirm button label (Ok by default)
+* Added attribute `mdp-cancel-text` to set cancel button label (Cancel by default)
 
 ### 0.7.5
 

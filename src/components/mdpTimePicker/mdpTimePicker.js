@@ -8,8 +8,8 @@ function TimePickerCtrl($scope, $mdDialog, time, autoSwitch, ampm, confirmText, 
     this.time = moment(time);
     this.autoSwitch = !!autoSwitch;
     this.ampm = !!ampm;
-    this.confirmText = confirmText;
-    this.cancelText = cancelText;
+    this.confirmText= confirmText ? confirmText :"OK";
+    this.cancelText= cancelText ? cancelText :"Cancel";
 
     this.hoursFormat = self.ampm ? "h" : "H";
     this.minutesFormat = "mm";
@@ -389,8 +389,8 @@ module.directive("mdpTimePicker", ["$mdpTimePicker", "$timeout", function($mdpTi
         },
         link: function(scope, element, attrs, ngModel, $transclude) {
             scope.format = scope.format || "HH:mm";
-            scope.confirmText= scope.confirmText ? scope.confirmText :"OK";
-            scope.cancelText= scope.cancelText ? scope.cancelText :"Cancel";
+            scope.confirmText= scope.confirmText;
+            scope.cancelText= scope.cancelText;
             function showPicker(ev) {
                 $mdpTimePicker(ngModel.$modelValue, {
                     targetEvent: ev,
